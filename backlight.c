@@ -7,8 +7,6 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-#include <string>
-
 static const char *BACKLIGHT_PATH =
     "/sys/class/backlight/intel_backlight/brightness";
 static const char *MAX_BRIGHTNESS_PATH =
@@ -53,7 +51,7 @@ int main(int argc, char **argv) {
 
   // Parse
   const char *amount_str = argv[1];
-  const bool is_relative = (amount_str[0] == '+' || amount_str[0] == '-');
+  const int is_relative = (amount_str[0] == '+' || amount_str[0] == '-');
   char *endptr;
   int amount = strtol(amount_str, &endptr, 10);
   if (endptr == amount_str) {
@@ -63,7 +61,7 @@ int main(int argc, char **argv) {
 
   // If the number was followed by a percent sign, it's in percent of max
   // brightness val not in raw units
-  const bool is_percent = *endptr == '%';
+  const int is_percent = *endptr == '%';
 
   // Read the max brightness / current brightness values
   const int max_brightness = read_file(MAX_BRIGHTNESS_PATH);
