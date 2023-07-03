@@ -1,2 +1,2 @@
 all:
-	c++ $(CXXFLAGS) -Wall -Wextra -Werror -o backlight backlight.cpp
+	cc $(CFLAGS) -Wall -Wextra -Werror -o backlight backlight.cpp
